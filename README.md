@@ -12,10 +12,7 @@ Requirements
 ### Platform
 - Debian 6.0
 - Ubuntu 10.04+
-- RHEL 5.x and RHEL 6.x w/ EPEL enabled
-
-### Cookbooks
-The `yum` cookbook by Opscode provides `recipe[yum::epel]` that can be used on RHEL-family systems to enable the EPEL repository containing the openvpn RPM. See __Usage__ below.
+- RHEL 5.x and RHEL 6.x
 
 ### Not Supported
 This cookbook is designed to set up a basic installation of OpenVPN that will work for many common use cases. The following configurations are not supported by default with this cookbook:
@@ -99,7 +96,7 @@ override_attributes(
 )
 ```
 
-**Note**: If you are using a Red Hat EL distribution, you may need the EPEL repository enabled to install the openvpn package. You can use Opscode's `recipe[yum::epel]` for this. Either add it to the run list in the openvpn role above, or add to a base role used by all your RHEL-family systems.
+**Note**: If you are using a Red Hat EL distribution then the `install` recipe will automatically enable the EPEL repository in order to install OpenVPN.
 
 To push routes to clients, add `node['openvpn']['routes]` as an array attribute, e.g. if the internal network is 192.168.100.0/24:
 

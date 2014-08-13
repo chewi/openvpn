@@ -1,14 +1,27 @@
-# routes = node['openvpn']['routes']
-# routes << node['openvpn']['push'] if node['openvpn'].attribute?('push')
-# node.default['openvpn']['routes'] = routes.flatten
+#
+# Cookbook Name:: openvpn
+# Recipe:: server
+#
+# Copyright 2014, Xhost Australia
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
 # in the case the key size is provided as string, no integer support in metadata (CHEF-4075)
 node.override['openvpn']['key']['size'] = node['openvpn']['key']['size'].to_i
 
 key_dir  = node['openvpn']['key_dir']
 key_size = node['openvpn']['key']['size']
-
-include_recipe 'yum-epel' if platform_family?('rhel')
 
 directory key_dir do
   owner 'root'
@@ -105,4 +118,8 @@ openvpn_conf 'server' do
   notifies :restart, 'service[openvpn]'
   only_if { node['openvpn']['configure_default_server'] }
   action :create
+end
+
+service 'openvpn' do
+  action [:enable, :start]
 end
