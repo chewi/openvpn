@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "openvpn::install"
-include_recipe "openvpn::server"
+include_recipe 'openvpn::install'
+include_recipe 'openvpn::server'
