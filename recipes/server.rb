@@ -119,3 +119,7 @@ openvpn_conf 'server' do
   only_if { node['openvpn']['configure_default_server'] }
   action :create
 end
+
+service 'openvpn' do
+  action [:enable, :start]
+end
