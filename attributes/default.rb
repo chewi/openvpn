@@ -58,6 +58,7 @@ default['openvpn']['config']['log']             = '/var/log/openvpn.log'
 default['openvpn']['config']['routes']          = nil
 default['openvpn']['config']['script-security'] = 2
 default['openvpn']['config']['server']          = "#{node['openvpn']['subnet']} #{node['openvpn']['netmask']}"
+default['openvpn']['config']['client-config-dir'] = 'ccd'
 
 default['openvpn']['config']['ca']              = node['openvpn']['signing_ca_cert']
 default['openvpn']['config']['key']             = "#{node['openvpn']['key_dir']}/server.key"

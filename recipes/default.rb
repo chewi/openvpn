@@ -69,6 +69,13 @@ directory '/etc/openvpn/server.up.d' do
   mode '0755'
 end
 
+directory "/etc/openvpn/#{node['openvpn']['config']['client-config-dir']}" do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  only_if { node['openvpn']['config']['client-config-dir'] }
+end
+
 template "#{key_dir}/openssl.cnf" do
   source 'openssl.cnf.erb'
   owner 'root'
